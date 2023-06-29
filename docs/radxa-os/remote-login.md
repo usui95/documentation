@@ -44,48 +44,82 @@ sidebar_position: 60
 sudo apt-get update
 ```
 
-2. 输入以下命令安装TightVNC Server:  
+2. 输入以下命令安装tightvncserver:  
 
 ```
-sudo apt-get install tightvncserver
+sudo apt install tigervnc-standalone-server
+```
+3. 安装dbus-x11依赖项以确保与你的VNC服务器的正确连接：
+```bash
+sudo apt install dbus-x11
+```
+4. 安装后完成VNC服务器的初始配置，请使用vncserver命令来设置安全密码并创建初始配置文件：  
+
+```
+vncserver
 ```
 
-3. 运行 `tightvncserver`.
+    接下来会有一个提示，让你输入并验证一个密码，以便远程访问你的设备：
+        ```
+        You will require a password to access your desktops.
+        Password:
+        Verify:
+        ```
+    密码的长度必须在六到八个字符之间。超过八个字符的密码将被自动截断。
+    一旦你验证了密码，你可以选择创建一个仅用于查看的密码。使用只查看密码登录的用户将不能用鼠标或键盘控制VNC实例。
+    如果你想向其他使用VNC服务器的人演示一些东西，这是一个有用的选项，但这不是必须的。
+        ```
+        You will require a password to access your desktops.
+        Password:
+        Verify:
+        Would you like to enter a view-only password (y/n)? n
 
-这将提示您为 VNC 连接设置密码。
+        New 'X' desktop is rock-5b:1
 
-4. 要停止 TightVNC Server，您可以使用以下命令：  
-
-```
-tightvncserver -kill :1
-```
-
-注意：如果您在第一次运行 TightVNC Server 时没有使用“:1”参数，请相应地进行调整。
+        Creating default startup script /home/radxa/.vnc/xstartup
+        Starting applications specified in /home/radxa/.vnc/xstartup
+        Log file is /home/radxa/.vnc/rock-5b:1.log
+        ```
 
 
 ### 配置 VNC 服务器
 
-1. 一旦 TightVNC Server启动，它将创建一个 VNC 会话，其中包含 VNC 服务器的 IP 地址和端口号（通常为 5901）。
-
-2. 在终端应用程序中，输入以下命令来编辑 VNC Server 的配置文件：  
-
+1. 一旦 tightvncserver启动，它将创建一个 VNC 会话，其中包含 VNC 服务器的 IP 地址和端口号（通常为 5901）,因与要改变VNC服务器的配置方式，首先用以下命令停止运行在5901端口的VNC服务器实例：
 ```
-nano ~/.vnc/xstartup
+vncserver -kill :1
 ```
-
-3. 将以下行添加到文件末尾以启用 LXDE 桌面环境：  
-
+   当VNC首次设置时，它会在5901端口启动一个默认的服务器实例。这个端口被称为显示端口，被VNC称为:1。 VNC可以在其他显示端口启动多个实例，如:2、:3，等等
+2. 运行vncserver命令时会在~/.vnc目录下生成一个xstartup，没有生成请手动创建并赋予可执行权限：
 ```
-lxsession -s LXDE &
+touch ~/.vnc/xstartup
+chmod +x ~/.vnc/xstartup
 ```
-
-4. 输入以下命令重新启动 VNC 服务器：  
-
+编辑xstartup配置文件如下：
 ```
-tightvncserver -kill :1
-tightvncserver  
+radxa@rock-5b:~$ cat ~/.vnc/xstartup
+#!/bin/sh
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+unset XDG_RUNTIME_DIR
+/etc/X11/xinit/xinitrc
+[ -x /etc/vnc/xstartup  ] && exec /etc/vnc/xstartup
+[ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources
+xsetroot -solid grey
+#vncconfig -iconic &
+startkde &
 ```
-
+3. 配置编辑好后，重新启动VNC服务器：
+```
+vncserver -localhost no
+```
+4. 查看VNC服务器：
+```
+vncserver -list
+TigerVNC server sessions:
+X DISPLAY #	RFB PORT #	PROCESS ID	SERVER
+:1         	5901      	2160      	Xtigervnc
+:2         	5902      	2872      	Xtigervnc
+```
 5. 在 VNC 查看器上测试连接：在您的 Windows PC 上，打开 VNC 查看器，输入您产品的 IP 地址和端口号，然后使用 VNC 服务器的用户名和密码进行身份验证。    
 
 ### 在 Windows PC 上安装 VNC 查看器
