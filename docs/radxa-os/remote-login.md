@@ -32,7 +32,7 @@ sidebar_position: 60
 这是一个基本的 SSH 连接过程。 您可以使用其他 SSH 选项进行更高级的连接。
 
 
-## 远程桌面
+## 远程桌面-KDE桌面
 
 这是一个教程，介绍如何从 Windows 计算机使用 VNC 远程访问系统。  
 
@@ -89,6 +89,7 @@ vncserver
 vncserver -kill :1
 ```
    当VNC首次设置时，它会在5901端口启动一个默认的服务器实例。这个端口被称为显示端口，被VNC称为:1。 VNC可以在其他显示端口启动多个实例，如:2、:3，等等
+   
 2. 运行vncserver命令时会在~/.vnc目录下生成一个xstartup，没有生成请手动创建并赋予可执行权限：
 ```
 touch ~/.vnc/xstartup
