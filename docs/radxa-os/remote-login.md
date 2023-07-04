@@ -58,38 +58,19 @@ sudo apt-get install dbus-x11
 ```
 vncserver
 ```
+:::note
+ Would you like to enter a view-only password (y/n)? n 提示是否只是观看，建议选择no，输入n，这样远程就可以操作，而不是仅仅观看，请根据自身实际情况
+:::
 
-    接下来会有一个提示，让你输入并验证一个密码，以便远程访问你的设备：
-        
-        You will require a password to access your desktops.
-        Password:
-        Verify:
-        
-    密码的长度必须在六到八个字符之间。超过八个字符的密码将被自动截断。
-    一旦你验证了密码，你可以选择创建一个仅用于查看的密码。使用只查看密码登录的用户将不能用鼠标或键盘控制VNC实例。
-    如果你想向其他使用VNC服务器的人演示一些东西，这是一个有用的选项，但这不是必须的。
-        
-        You will require a password to access your desktops.
-        Password:
-        Verify:
-        Would you like to enter a view-only password (y/n)? n
 
-        New 'X' desktop is rock-5b:1
-
-        Creating default startup script /home/radxa/.vnc/xstartup
-        Starting applications specified in /home/radxa/.vnc/xstartup
-        Log file is /home/radxa/.vnc/rock-5b:1.log
-        
 
 
 ### 配置 VNC 服务器
 
-1. 一旦 tightvncserver启动，它将创建一个 VNC 会话，其中包含 VNC 服务器的 IP 地址和端口号（通常为 5901）,因与要改变VNC服务器的配置方式，首先用以下命令停止运行在5901端口的VNC服务器实例：
+1. 一旦 TigerVNC 启动，它将创建一个 VNC 会话，其中包含 VNC 服务器的 IP 地址和端口号（通常为 5901）,因与要改变VNC服务器的配置方式，首先用以下命令停止运行在5901端口的VNC服务器实例：
 ```
 vncserver -kill :1
-```
-   当VNC首次设置时，它会在5901端口启动一个默认的服务器实例。这个端口被称为显示端口，被VNC称为:1。 VNC可以在其他显示端口启动多个实例，如:2、:3，等等
-   
+```  
 2. 运行vncserver命令时会在~/.vnc目录下生成一个xstartup，没有生成请手动创建并赋予可执行权限：
 ```
 touch ~/.vnc/xstartup
