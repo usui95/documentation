@@ -44,10 +44,10 @@ This is a tutorial on how to access your system remotely from a Windows computer
 sudo apt-get update
 ```
 
-2. Enter the following command to install tightvncserver.  
+2. Enter the following command to install TigerVNC Server.  
 
 ```
-sudo apt install tigervnc-standale-server
+sudo apt-get install tigervnc-standale-server
 ```
 3. Install the dbus-x11 dependencies to ensure proper connection to your VNC server: 
 ```
