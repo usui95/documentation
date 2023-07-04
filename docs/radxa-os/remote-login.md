@@ -51,7 +51,7 @@ sudo apt-get install tigervnc-standalone-server
 ```
 3. 安装dbus-x11依赖项以确保与你的VNC服务器的正确连接：
 ```
-sudo apt install dbus-x11
+sudo apt-get install dbus-x11
 ```
 4. 安装后完成VNC服务器的初始配置，请使用vncserver命令来设置安全密码并创建初始配置文件：  
 
