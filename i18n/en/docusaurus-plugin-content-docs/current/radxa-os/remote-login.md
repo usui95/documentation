@@ -40,12 +40,9 @@ This is a tutorial on how to access your system remotely from a Windows computer
 ### Installing VNC Server
 
 1. Open the Terminal application and enter the following command to update the package list:
-
-````bash
-```
+```bash
 sudo apt-get update
-``` 
-````
+```
 2. Enter the following command to install TigerVNC Server:
 
 ```bash
