@@ -62,9 +62,6 @@ vncserver
  Would you like to enter a view-only password (y/n)? n 提示是否只是观看，建议选择no，输入n，这样远程就可以操作，而不是仅仅观看，请根据自身实际情况
 :::
 
-
-
-
 ### 配置 VNC 服务器
 
 1. 一旦 TigerVNC 启动，它将创建一个 VNC 会话，其中包含 VNC 服务器的 IP 地址和端口号（通常为 5901）,因与要改变VNC服务器的配置方式，首先用以下命令停止运行在5901端口的VNC服务器实例：

@@ -3,6 +3,7 @@ sidebar_label: 'Remote Login'
 sidebar_position: 60
 ---
 
+
 # Remote login
 
 ## SSH
@@ -38,63 +39,50 @@ This is a tutorial on how to access your system remotely from a Windows computer
 
 ### Installing VNC Server
 
-1. Open the Terminal application and enter the following command to update the package list.   
+1. Open the Terminal application and enter the following command to update the package list:
 
+````bash
 ```
 sudo apt-get update
-```
+``` 
+````
+2. Enter the following command to install TigerVNC Server:
 
-2. Enter the following command to install TigerVNC Server.  
-
-```
+```bash
 sudo apt-get install tigervnc-standale-server
 ```
+
 3. Install the dbus-x11 dependencies to ensure proper connection to your VNC server: 
-```
+```bash
 sudo apt-get install dbus-x11
 ```
-4. After installation complete the initial configuration of the VNC server, use the vncserver command to set the security password and create the initial configuration file: ``budo apt install dbus-x11  
+4. After installation complete the initial configuration of the VNC server, use the vncserver command to set the security password and create the initial configuration file: 
 
-```
+```bash
 vncserver
 ```
-
-    Next you will be prompted to enter and verify a password for remote access to your device: 
-        You will require a password to access your desktops.
-        Password.
-        Verify.
-    
-    The length of the password must be between six and eight characters. Passwords longer than eight characters will be automatically truncated.
-    Once you have verified the password, you have the option to create a view-only password. Users who log in with a view-only password will not be able to control the VNC instance with the mouse or keyboard.
-    This is a useful option if you want to demonstrate something to other people using the VNC server, but it is not required.
-        You will require a password to access your desktops.
-        Password.
-        Verify.
-        Would you like to enter a view-only password (y/n)? n
-    
-        New 'X' desktop is rock-5b:1
-    
-        Creating default startup script /home/radxa/.vnc/xstartup
-        Starting applications specified in /home/radxa/.vnc/xstartup
-        Log file is /home/radxa/.vnc/rock-5b:1.log
-    
-
+:::note
+ Would you like to enter a view-only password (y/n)? n Prompt for view-only password, it is recommended to select no and enter n, so that the remote can operate, not just watch, please according to their actual situation
+:::
 
 ### Configure the VNC server
 
-1. Once tightvncserver starts, it will create a VNC session with the IP address and port number of the VNC server (usually 5901), because to change the way the VNC server is configured, first stop the VNC server instance running on port 5901 with the following command:
-```
+Once TigerVNC starts, it will create a VNC session with the IP address and port number of the VNC server (usually 5901), because to change the way the VNC server is configured, first stop the VNC server instance running on port 5901 with the following command:
+
+```bash
 vncserver -kill :1
 ```
-   When VNC is first set up, it starts a default server instance on port 5901. This port is called the display port and is referred to by VNC as :1. VNC can start multiple instances on other display ports, such as :2, :3, etc.
 
-2. Running the vncserver command will generate an xstartup in the ~/.vnc directory. If it is not generated, please create it manually and grant executable permissions:
-```
+2. Run the vncserver command to generate an xstartup in the ~/.vnc directory, if not, please create it manually and give it executable privileges:
+
+```bash
 touch ~/.vnc/xstartup
 chmod +x ~/.vnc/xstartup
 ```
+
 Edit the xstartup configuration file as follows:
-```
+
+```bash
 radxa@rock-5b:~$ cat ~/.vnc/xstartup
 #! /bin/sh
 unset SESSION_MANAGER
@@ -107,18 +95,24 @@ xsetroot -solid grey
 #vncconfig -iconic &
 startkde &
 ```
+
 3. After the configuration is edited, restart the VNC server:
-```
+
+```shell
 vncserver -localhost no
 ```
+
 4. View the VNC server:
-```
+
+```shell
 vncserver -list
+
 TigerVNC server sessions.
 X DISPLAY # RFB PORT # PROCESS ID SERVER
 :1 5901 2160 Xtigervnc
 :2 5902 2872 Xtigervnc
 ```
+
 5. Test the connection on the VNC viewer: On your Windows PC, open the VNC viewer, enter the IP address and port number of your product, and then authenticate using the user name and password of the VNC server.    
 
 ### Installing the VNC viewer on your Windows PC
@@ -128,6 +122,6 @@ X DISPLAY # RFB PORT # PROCESS ID SERVER
 
 ### Connection setup
 
-1. On the VNC viewer, enter the IP address and port number of the product. 2.  
-2. Use the user name and password of the VNC server to authenticate. 3.
+1. On the VNC viewer, enter the IP address and port number of the product. 
+2. Use the user name and password of the VNC server to authenticate. 
 3. After successful connection, you can control remotely. 
