@@ -51,7 +51,7 @@ sudo apt-get install tigervnc-standale-server
 ```
 3. Install the dbus-x11 dependencies to ensure proper connection to your VNC server: 
 ```
-sudo apt install dbus-x11
+sudo apt-get install dbus-x11
 ```
 4. After installation complete the initial configuration of the VNC server, use the vncserver command to set the security password and create the initial configuration file: ``budo apt install dbus-x11  
 
