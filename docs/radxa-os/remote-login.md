@@ -44,13 +44,13 @@ sidebar_position: 60
 sudo apt-get update
 ```
 
-2. 输入以下命令安装tightvncserver:  
+2. 输入以下命令安装TigerVNC Server:  
 
 ```
-sudo apt install tigervnc-standalone-server
+sudo apt-get install tigervnc-standalone-server
 ```
 3. 安装dbus-x11依赖项以确保与你的VNC服务器的正确连接：
-```bash
+```
 sudo apt install dbus-x11
 ```
 4. 安装后完成VNC服务器的初始配置，请使用vncserver命令来设置安全密码并创建初始配置文件：  
@@ -60,15 +60,15 @@ vncserver
 ```
 
     接下来会有一个提示，让你输入并验证一个密码，以便远程访问你的设备：
-        ```
+        
         You will require a password to access your desktops.
         Password:
         Verify:
-        ```
+        
     密码的长度必须在六到八个字符之间。超过八个字符的密码将被自动截断。
     一旦你验证了密码，你可以选择创建一个仅用于查看的密码。使用只查看密码登录的用户将不能用鼠标或键盘控制VNC实例。
     如果你想向其他使用VNC服务器的人演示一些东西，这是一个有用的选项，但这不是必须的。
-        ```
+        
         You will require a password to access your desktops.
         Password:
         Verify:
@@ -79,7 +79,7 @@ vncserver
         Creating default startup script /home/radxa/.vnc/xstartup
         Starting applications specified in /home/radxa/.vnc/xstartup
         Log file is /home/radxa/.vnc/rock-5b:1.log
-        ```
+        
 
 
 ### 配置 VNC 服务器
